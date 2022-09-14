@@ -2,6 +2,7 @@
   "name": "experiment",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://stanislavhh.github.io/experiment",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
