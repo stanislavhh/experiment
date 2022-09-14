@@ -1,0 +1,27 @@
+{
+  "extends": ["airbnb", "plugin:react/recommended", "prettier"],
+  "parserOptions": {
+    "sourceType": "module",
+    "allowImportExportEverywhere": false,
+    "codeFrame": false
+  },
+  "env": {
+    "browser": true
+  },
+  "settings": {
+    "import/resolver": {
+        "node": {
+            "paths": ["src"]
+        }
+    }
+  },
+  "rules": {
+    "max-len": ["error", { "code": 100 }],
+    "prefer-promise-reject-errors": ["off"],
+    "react/jsx-filename-extension": ["off"],
+    "react/prop-types": ["off"],
+    "no-return-assign": ["off"],
+    "react/no-unknown-property": ["off"],
+    "react/jsx-props-no-spreading": ["off"]
+  }
+}
