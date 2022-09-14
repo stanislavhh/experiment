@@ -1,16 +1,18 @@
 import React from 'react';
 import { useFrame } from '@react-three/fiber';
+import { SUN_RADIUS } from 'modules/space/constants';
 
-export default function Star({ sphereRadius, position, move, color = '#dbdfe1' }) {
+export default function Star({ sphereRadius, position, move, onSunMove, color = '#dbdfe1' }) {
   const mesh = React.useRef();
   const speed = React.useRef(0.1);
+  const [insideSun, setInsideSun] = React.useState(false)
 
-  const moveStar = (toZero = true) => {
-    if (!move) {
+  const moveStar = () => {
+    if (!move || insideSun) {
       return
     }
 
-    const { x, y, z } = mesh.current.position;
+    let { x, y, z } = mesh.current.position;
     const arr = [
       { key: 'x', value: x },
       { key: 'y', value: y },
@@ -23,19 +25,22 @@ export default function Star({ sphereRadius, position, move, color = '#dbdfe1' }
 
     arr.forEach(({ key, value }) => {
       const v = Math.abs(value / max.value) * speed.current;
-      if (toZero) {
-        mesh.current.position[key] += value > 0 ? -v : v;
-      } else {
-        mesh.current.position[key] += value > 0 ? v : -v;
-      }
+      mesh.current.position[key] += value > 0 ? -v : v;
     });
+
+    ({ x, y, z } = mesh.current.position)
+
+    if ([x,y,z].every((p) => Math.abs(p) < SUN_RADIUS)) {
+      setInsideSun(true)
+      onSunMove(mesh.current.uuid)
+    }
 
     speed.current += 0.05
   };
 
-  useFrame(() => {
-    moveStar();
-  });
+  useFrame(moveStar);
+
+  if (insideSun) return null
 
   return (
     <mesh ref={mesh} receiveShadow position={position} visible>

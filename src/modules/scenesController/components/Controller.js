@@ -1,14 +1,30 @@
 import React from 'react';
-import { SCENES, DEFAULT_SCENE } from '../constants';
+import { createUseStyles } from 'react-jss';
+import { SCENES, DEFAULT_SCENE_INDEX } from '../constants';
 import ControlPanel from './ControlPanel';
 
-export default function Controller() {
-  const [scene] = React.useState(DEFAULT_SCENE);
-  const SceneComponent = SCENES[scene];
+const useStyles = createUseStyles({
+  thanks: {
+    color: 'white',
+  },
+});
 
-  return (
+export default function Controller() {
+  const styles = useStyles();
+  const [sceneIndex, setSceneIndex] = React.useState(DEFAULT_SCENE_INDEX);
+  const SceneComponent = SCENES[sceneIndex];
+
+  const hasNoMoreScenes = SCENES.length === sceneIndex;
+
+  const nextScene = () => {
+    setSceneIndex(sceneIndex + 1);
+  };
+
+  return hasNoMoreScenes ? (
+    <div className={styles.thanks}>SMELLS GOOD</div>
+  ) : (
     <>
-      <SceneComponent />
+      <SceneComponent nextScene={nextScene} />
       <ControlPanel />
     </>
   );

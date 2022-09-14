@@ -1,7 +1,4 @@
-import Space from 'modules/space/components/Scene'
+import Space from 'modules/space/components/Scene';
 
-export const SCENES = {
-  space: Space
-}
-
-export const DEFAULT_SCENE = 'space'
+export const SCENES = [Space];
+export const DEFAULT_SCENE_INDEX = 0;

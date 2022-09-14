@@ -1,24 +1,33 @@
 import React from 'react';
-import { useFrame } from '@react-three/fiber';
 import { useSpring, animated } from '@react-spring/three';
+import { SUN_RADIUS } from 'modules/space/constants';
 
-export default function Sun({ onClick }) {
+export default function Sun({ onClick, destroy, nextScene }) {
   const mesh = React.useRef();
   const [active, setActive] = React.useState(false);
 
   const onPointerOver = () => setActive(true);
   const onPointerOut = () => setActive(false);
 
-  const { scale, color } = useSpring({
-    scale: active ? 2 : 1,
-    color: active ? 'red' : 'orange'
-  })
+  const getSunScale = () => {
+    if (destroy) return 0
+    if (active) return 2
 
-  useFrame(() => {});
+    return 1
+  }
+
+  const { scale, color } = useSpring({
+    scale: getSunScale(),
+    color: active ? 'red' : 'orange',
+    onRest: ({ value: { scale: nextScale }, finished }) => {
+      if (!Number(nextScale) && finished) {
+        nextScene();
+      }
+    },
+  });
 
   return (
     <animated.mesh
-      layers={0}
       ref={mesh}
       scale={scale}
       onClick={onClick}
@@ -27,8 +36,9 @@ export default function Sun({ onClick }) {
       receiveShadow
       position={[0, 0, 0]}
       visible
+      on
     >
-      <sphereGeometry attach="geometry" args={[25]} />
+      <sphereGeometry attach="geometry" args={[SUN_RADIUS]} />
       <animated.meshBasicMaterial
         opacity={0.7}
         attach="material"
