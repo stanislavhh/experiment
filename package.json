@@ -7,7 +7,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "prettier"
+    "format": "prettier",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -31,6 +33,7 @@
     "@react-spring/three": "^9.5.4",
     "@react-three/drei": "^9.29.1",
     "@react-three/fiber": "^8.7.3",
+    "gh-pages": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-jss": "^10.9.2",
