@@ -39,9 +39,9 @@ jobs:
 
     - name: Deploy
       run: |
-        git config --global user.name $user_name
-        git config --global user.email $user_email
-        git remote set-url origin https://stanislavhh@github.com/experiment
+        git config --global user.name stanislavhh
+        git config --global user.email sh996999@gmail.com
+        git remote set-url origin https://${github_token}@github.com/${repository}
         npm run deploy
       env:
         user_name: 'github-actions[bot]'
