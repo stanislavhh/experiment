@@ -1,6 +1,30 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { RepeatWrapping} from 'three';
+import { TextureLoader } from 'three/src/loaders/TextureLoader';
 import { useSpring, animated } from '@react-spring/three';
+import { useFrame, useLoader } from '@react-three/fiber';
 import { SUN_RADIUS } from 'modules/space/constants';
+import { vertexSun, fragmentSun, uniformsSun } from 'assets/shaders/Sun';
+import dustTexture from 'assets/textures/texture.png';
+
+function SunDust() {
+  const dust = useRef();
+  const texture = useLoader(TextureLoader, dustTexture);
+
+  texture.wrapS = RepeatWrapping;
+  texture.repeat.set(2, 1);
+
+  useFrame(({ camera }) => {
+    dust.current?.lookAt(camera.position);
+  });
+
+  return (
+    <mesh ref={dust}>
+      <sphereGeometry attach="geometry" args={[SUN_RADIUS * 5]} />
+      <meshBasicMaterial attach="material" alphaMap={texture} transparent color="white" opacity={.25} />
+    </mesh>
+  );
+}
 
 export default function Sun({ onClick, destroy, nextScene }) {
   const mesh = React.useRef();
@@ -10,20 +34,24 @@ export default function Sun({ onClick, destroy, nextScene }) {
   const onPointerOut = () => setActive(false);
 
   const getSunScale = () => {
-    if (destroy) return 0
-    if (active) return 2
+    if (destroy) return 0;
+    if (active) return 1.1;
 
-    return 1
-  }
+    return 1;
+  };
 
-  const { scale, color } = useSpring({
+  const { scale } = useSpring({
     scale: getSunScale(),
-    color: active ? 'red' : 'orange',
     onRest: ({ value: { scale: nextScale }, finished }) => {
       if (!Number(nextScale) && finished) {
         nextScene();
       }
     },
+  });
+
+  useFrame((state) => {
+    const { clock } = state;
+    mesh.current.material.uniforms.time.value = clock.getElapsedTime();
   });
 
   return (
@@ -33,20 +61,16 @@ export default function Sun({ onClick, destroy, nextScene }) {
       onClick={onClick}
       onPointerOver={onPointerOver}
       onPointerOut={onPointerOut}
-      receiveShadow
       position={[0, 0, 0]}
       visible
-      on
     >
       <sphereGeometry attach="geometry" args={[SUN_RADIUS]} />
-      <animated.meshBasicMaterial
-        opacity={0.7}
-        attach="material"
-        color={color}
-        roughness={0.15}
-        metalness={0.1}
-        shininess={1}
+      <shaderMaterial
+        fragmentShader={fragmentSun}
+        vertexShader={vertexSun}
+        uniforms={uniformsSun}
       />
+      <SunDust />
     </animated.mesh>
   );
 }

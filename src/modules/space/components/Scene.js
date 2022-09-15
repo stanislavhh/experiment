@@ -8,7 +8,7 @@ import { getRandomPosition } from 'modules/space/utils';
 
 const stars = Array.from({ length: STARS_COUNT }, (_, index) => ({
   id: index,
-  radius: 1 + Math.random() * 2,
+  radius:  Math.random() * 2.5,
   position: getRandomPosition(),
 }));
 
@@ -30,7 +30,7 @@ export default function Scene({ nextScene }) {
   return (
     <Canvas>
       <Camera maxDistance={MAX_DISTANCE} />
-      <pointLight castShadow />
+      <pointLight />
 
       <color attach="background" args={['black']} />
       {stars.map(({ radius, id, position }) => (

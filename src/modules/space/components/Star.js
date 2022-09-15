@@ -7,11 +7,7 @@ export default function Star({ sphereRadius, position, move, onSunMove, color = 
   const speed = React.useRef(0.1);
   const [insideSun, setInsideSun] = React.useState(false)
 
-  const moveStar = () => {
-    if (!move || insideSun) {
-      return
-    }
-
+  const moveStar = (t) => {
     let { x, y, z } = mesh.current.position;
     const arr = [
       { key: 'x', value: x },
@@ -34,11 +30,16 @@ export default function Star({ sphereRadius, position, move, onSunMove, color = 
       setInsideSun(true)
       onSunMove(mesh.current.uuid)
     }
-
-    speed.current += 0.05
+    speed.current += (0.01 + t / 1000)
   };
 
-  useFrame(moveStar);
+  useFrame(({ clock }) => {
+    if (insideSun) return
+    
+    if (move) {
+      moveStar(clock.getElapsedTime())
+    }
+  });
 
   if (insideSun) return null
 

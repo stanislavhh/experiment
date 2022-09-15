@@ -6,7 +6,7 @@ export default function Camera({ maxDistance }) {
   const { camera } = useThree()
 
   React.useEffect(() => {
-    const d = Math.floor(maxDistance / 2)
+    const d = Math.floor(maxDistance / 3)
     camera.position.set(d, d, d)
   }, [])
 
@@ -18,7 +18,7 @@ export default function Camera({ maxDistance }) {
         near={-1000}
         far={1000}
       />
-      <OrbitControls maxDistance={maxDistance}  minDistance={0} />
+      <OrbitControls autoRotate autoRotateSpeed={0.25} maxDistance={maxDistance}  minDistance={50} />
     </>
   );
 }

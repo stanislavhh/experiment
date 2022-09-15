@@ -12,7 +12,7 @@ const useStyles = createUseStyles({
 export default function Controller() {
   const styles = useStyles();
   const [sceneIndex, setSceneIndex] = React.useState(DEFAULT_SCENE_INDEX);
-  const SceneComponent = SCENES[sceneIndex];
+  const Component = SCENES[sceneIndex];
 
   const hasNoMoreScenes = SCENES.length === sceneIndex;
 
@@ -24,7 +24,7 @@ export default function Controller() {
     <div className={styles.thanks}>SMELLS GOOD</div>
   ) : (
     <>
-      <SceneComponent nextScene={nextScene} />
+      <Component nextScene={nextScene} />
       <ControlPanel />
     </>
   );
