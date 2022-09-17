@@ -23,7 +23,7 @@ export default function Scene({ nextScene }) {
       <Camera maxDistance={MAX_CAMERA_DISTANCE} />
       <spotLight castShadow intensity={20} position={[500, 20, 800]} />
       <pointLight castShadow position={[90, 50, 130]} intensity={5} />
-      <ambientLight />
+      <ambientLight intensity={1} />
       <Physics
         size={2}
         gravity={[0, -50, 0]}

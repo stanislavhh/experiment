@@ -11,12 +11,17 @@ export const SUN_PARAMS = {
 };
 
 export const DEFAULT_CONTACT_PHYSICS_MATERIAL = {
-          friction: 0.9,
-          restitution: 0.7,
-          contactEquationStiffness: 1e7,
-          contactEquationRelaxation: 1,
-          frictionEquationStiffness: 1e7,
-          frictionEquationRelaxation: 2,
-        }
+  friction: 0.9,
+  restitution: 0.7,
+  contactEquationStiffness: 1e7,
+  contactEquationRelaxation: 1,
+  frictionEquationStiffness: 1e7,
+  frictionEquationRelaxation: 2,
+};
 
-export const FLOAT_SIZE = [15, 2, 15]
+export const FLOAT_SIZE = [15, 2, 15];
+export const DEFAULT_FLOAT_POSITION = [0, 2, 0];
+export const DEFAULT_FLOAT_VELOCITY = [0, 0, 0];
+
+export const MAX_VELOCITY = 50;
+
