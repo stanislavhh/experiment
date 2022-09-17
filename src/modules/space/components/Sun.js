@@ -5,7 +5,7 @@ import { useSpring, animated } from '@react-spring/three';
 import { useFrame, useLoader } from '@react-three/fiber';
 import { SUN_RADIUS } from 'modules/space/constants';
 import { vertexSun, fragmentSun, uniformsSun } from 'assets/shaders/Sun';
-import dustTexture from 'assets/textures/texture.png';
+import dustTexture from 'assets/textures/sundust.png';
 
 function SunDust() {
   const dust = useRef();

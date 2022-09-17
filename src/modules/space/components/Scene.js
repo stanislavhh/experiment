@@ -3,14 +3,10 @@ import { Canvas } from '@react-three/fiber';
 import Star from 'modules/space/components/Star';
 import Sun from 'modules/space/components/Sun';
 import Camera from 'modules/space/components/Camera';
-import { STARS_COUNT, MAX_DISTANCE } from 'modules/space/constants';
-import { getRandomPosition } from 'modules/space/utils';
+import { MAX_DISTANCE } from 'modules/space/constants';
+import { getStars } from 'modules/space/utils';
 
-const stars = Array.from({ length: STARS_COUNT }, (_, index) => ({
-  id: index,
-  radius:  Math.random() * 2.5,
-  position: getRandomPosition(),
-}));
+const stars = getStars();
 
 export default function Scene({ nextScene }) {
   const [moving, setMoving] = useState(false);

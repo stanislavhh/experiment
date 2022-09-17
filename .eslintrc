@@ -19,6 +19,7 @@
       }
     }
   },
+  "ignorePatterns": ["**/vendors/*.js"],
   "rules": {
     "max-len": ["error", { "code": 150 }],
     "prefer-promise-reject-errors": ["off"],
@@ -29,5 +30,6 @@
     "react/jsx-props-no-spreading": ["off"],
     "import/no-names-as-default": ["off"],
     "import/no-named-as-default-member": ["off"],
+    "import/no-unresolved": ["error", { "ignore": ["three/addons"] }]
   }
 }
