@@ -29,7 +29,11 @@ export default function Scene({ nextScene }) {
   const sunPositionArray = [sunPosition.current.x, sunPosition.current.y, sunPosition.current.z];
 
   const handleHit = (e) => {
-    setHits((prev) => (e === 'increase' ? prev + 1 : 0));
+
+    setHits((prev) => {
+      if (prev === 10) return prev
+      return e === 'increase' ? prev + 1 : 0;
+    });
   };
 
   useEffect(() => {

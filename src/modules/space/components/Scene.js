@@ -23,8 +23,10 @@ export default function Scene({ nextScene }) {
 
   const sunClick = () => setMoving(!moving);
 
+  const d = Math.floor(MAX_DISTANCE / 3);
+
   return (
-    <Canvas>
+    <Canvas camera={{ position: [d, d, d] }}>
       <Camera maxDistance={MAX_DISTANCE} />
       <pointLight />
 
