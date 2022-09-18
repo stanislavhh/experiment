@@ -11,13 +11,21 @@ import { useSphere } from '@react-three/cannon';
 import eventBus from 'helpers/eventBus';
 import { getRandomBallPosition } from 'modules/sea/utils';
 
-export default function Ball() {
+export default function Ball({ onHit }) {
   const [ball, api] = useSphere(() => ({
     name: 'ball',
     mass: 1,
     visible: true,
     position: getRandomBallPosition(),
-    onCollide: (e) => eventBus.emit('ballCollision', e),
+    onCollide: (e) => {
+      if (e.body.name === 'plane') {
+        resetBall();
+        onHit();
+      } else {
+        eventBus.emit('ballCollision', e);
+        onHit('increase');
+      }
+    },
   }));
 
   const colorT = useLoader(THREE.TextureLoader, ColorTexture);
@@ -27,6 +35,12 @@ export default function Ball() {
   const metallicT = useLoader(THREE.TextureLoader, MetallicTexture);
   const hT = useLoader(THREE.TextureLoader, HeightTexture);
 
+  const resetBall = () => {
+    api.position.set(...getRandomBallPosition());
+    api.velocity.set(0, 0, 0);
+    api.angularVelocity.set(0, 0, 0);
+  };
+
   const handleBallCollision = () => {
     api.applyImpulse([0, 8, 0], [0, 0, 0]);
   };
@@ -34,17 +48,8 @@ export default function Ball() {
   useEffect(() => {
     eventBus.on('ballCollision', handleBallCollision);
 
-    const unsubscribe = api.position.subscribe((p) => {
-      if (p[1] < -50) {
-        api.position.set(...getRandomBallPosition());
-        api.velocity.set(0, 0, 0);
-        api.angularVelocity.set(0, 0, 0);
-      }
-    });
-
     return () => {
       eventBus.off('ballCollision', handleBallCollision);
-      unsubscribe();
     };
   }, []);
 
