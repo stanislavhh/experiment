@@ -9,6 +9,7 @@ import Float from 'modules/sea/components/Float';
 import Ball from 'modules/sea/components/Ball';
 import Plane from 'modules/sea/components/Plane';
 import Screen from 'modules/sea/components/Screen';
+import Seagull from 'modules/sea/components/Seagull';
 import {
   MAX_CAMERA_DISTANCE,
   VIEW_SIZE,
@@ -28,13 +29,13 @@ export default function Scene({ nextScene }) {
   const sunPositionArray = [sunPosition.current.x, sunPosition.current.y, sunPosition.current.z];
 
   const handleHit = (e) => {
-    setHits((prev) => e === 'increase' ? prev + 1 : 0);
+    setHits((prev) => (e === 'increase' ? prev + 1 : 0));
   };
 
   useEffect(() => {
     if (hits === 10) {
       // Do
-      setTimeout(nextScene, 100);
+      setTimeout(nextScene, 2000);
     }
   }, [hits]);
 
@@ -54,6 +55,7 @@ export default function Scene({ nextScene }) {
         <Plane />
         <Screen hits={hits} />
       </Physics>
+      <Seagull />
       <Sky
         distance={VIEW_SIZE}
         sunPosition={sunPositionArray}

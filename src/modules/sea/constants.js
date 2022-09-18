@@ -25,3 +25,6 @@ export const DEFAULT_FLOAT_VELOCITY = [0, 0, 0];
 
 export const MAX_VELOCITY = 50;
 
+
+export const INITIAL_BIRD_ROTATION = [0, Math.PI / 1.4, 0];
+export const BIRD_SPEED = 0.1;
