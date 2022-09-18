@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/experiment/static/js/main.8fd0942b.js",
+    "main.js": "/experiment/static/js/main.50a6be80.js",
     "static/js/787.f268bf31.chunk.js": "/experiment/static/js/787.f268bf31.chunk.js",
     "static/media/crisscross-foam_normal-dx.png": "/experiment/static/media/crisscross-foam_normal-dx.bbc52b809bb579d16e8a.png",
     "static/media/crisscross-foam_albedo.png": "/experiment/static/media/crisscross-foam_albedo.85c1da07b96ed1b09767.png",
@@ -8,13 +8,14 @@
     "static/media/crisscross-foam_roughness.png": "/experiment/static/media/crisscross-foam_roughness.c78f56726888ad4f5666.png",
     "static/media/crisscross-foam_height.png": "/experiment/static/media/crisscross-foam_height.6a41de6b64428c67501c.png",
     "static/media/scene1.mp3": "/experiment/static/media/scene1.f1901682ede0da568e55.mp3",
+    "static/media/seagull.glb": "/experiment/static/media/seagull.3ea10c63d3aa4f5cf443.glb",
     "static/media/waternormals.jpg": "/experiment/static/media/waternormals.537ec85b965d414829ab.jpg",
     "static/media/crisscross-foam_metallic.png": "/experiment/static/media/crisscross-foam_metallic.ac05d0a0b55c7d7fa767.png",
     "index.html": "/experiment/index.html",
-    "main.8fd0942b.js.map": "/experiment/static/js/main.8fd0942b.js.map",
+    "main.50a6be80.js.map": "/experiment/static/js/main.50a6be80.js.map",
     "787.f268bf31.chunk.js.map": "/experiment/static/js/787.f268bf31.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.8fd0942b.js"
+    "static/js/main.50a6be80.js"
   ]
 }
